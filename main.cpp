@@ -11,9 +11,11 @@ sf::Event ev;
 
 int main()
 {
-    window.setFramerateLimit(60);
+    //Text class
     Text text_up;
     Text text_down;
+    
+    //set text defould variables
     text_up.load_font("font.ttf");
     text_down.load_font("font.ttf");
     text_up.text.setOutlineThickness(4);
@@ -22,8 +24,21 @@ int main()
     text_up.text.setOutlineColor(sf::Color::Black);
     text_up.text.setCharacterSize(0);
 
+    //set maximum text size and minimum text size
     int max_font = 200;
     int min_font = 30;
+
+    //string for text
+    std::string text_up_string;
+    std::string text_up_string;
+
+    //mode of text (false = edit up text, true = edit down text)
+    bool mode;
+
+    //set frame limit to 60fps
+    window.setFramerateLimit(60);
+
+    //game loop
     while(true)
     {
         //event loop
@@ -36,20 +51,32 @@ int main()
             }
         }
 
-            //change text size
-            if(text_up.text.getCharacterSize() < min_font)
-            {
-                text_up.text.setCharacterSize(min_font);
-            } else if(text_up.text.getCharacterSize() > max_font)
-            {
-                text_up.text.setCharacterSize(max_font);
-            }
+         /*change text size*/
+            //change up text size to minimum or maximum
+        if(text_up.text.getCharacterSize() < min_font)
+        {
+            text_up.text.setCharacterSize(min_font);
+        } else if(text_up.text.getCharacterSize() > max_font)
+        {
+            text_up.text.setCharacterSize(max_font);            
+        }
+             //change down text size to minimum or maximum
+        if(text_down.text.getCharacterSize() < min_font)
+        {
+           text_down.text.setCharacterSize(min_font);
+        } else if(text_down.text.getCharacterSize() > max_font)
+        {
+            text_down.text.setCharacterSize(max_font);
+        }
 
-            //draw window & stuff
-            window.clear(sf::Color::Blue);
-            text_up.draw();
-            text_down.draw();
-            window.display();
+        //draw window & stuff
+            //clear window
+        window.clear(sf::Color::Blue);
+            //draw text
+        text_up.draw();
+        text_down.draw();
+            //dispaly window
+        window.display();
     }
     
 }
