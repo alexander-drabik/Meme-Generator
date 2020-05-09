@@ -117,11 +117,17 @@ int main()
             text_down.text.setCharacterSize(text_down.text.getCharacterSize()-1);
         }
         //change mode when enter is clicked
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && mode == false)
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
         {
-            mode = true;
-            text_up_string.pop_back();
-            text_up.text.setString(text_up_string);
+            if(mode == false)
+            {
+                mode = true;
+                text_up_string.pop_back();
+                text_up.text.setString(text_up_string);
+            } else
+            {
+                save();
+            }
         }
 
          /*change text size*/

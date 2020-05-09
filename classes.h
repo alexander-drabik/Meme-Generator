@@ -26,4 +26,11 @@ public:
   }
 };
 
+void save()
+{
+  sf::Texture texture;
+  texture.create(window.getSize().x, window.getSize().y);
+  texture.update(window);
+  texture.copyToImage().saveToFile("meme.png");
+}
 #endif
