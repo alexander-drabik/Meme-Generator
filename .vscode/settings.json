@@ -1,5 +1,9 @@
 {
     "files.associations": {
         "iostream": "cpp"
-    }
+    },
+    "workbench.colorTheme": "Solarized Dark",
+    "editor.fontWeight": "normal",
+    "window.zoomLevel": 0,
+    "customPresentationMode.backup": {}
 }

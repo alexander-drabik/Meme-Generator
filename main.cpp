@@ -20,9 +20,10 @@ int main()
     text_down.load_font("font.ttf");
     text_up.text.setOutlineThickness(4);
     text_down.text.setOutlineThickness(4);
-    text_up.text.setString("[enter text here");
-    text_up.text.setOutlineColor(sf::Color::Black);
-    text_up.text.setCharacterSize(0);
+    text_up.text.setString("ENTER TEXT HERE");
+    text_up.text.setOutlineColor(sf::Color(180, 180, 180));
+    text_up.text.setCharacterSize(150);
+    text_down.text.setCharacterSize(50);
 
     //set maximum text size and minimum text size
     int max_font = 200;
@@ -50,12 +51,12 @@ int main()
                 return 0;
             }
 
-            //type to string
+            //type
             if(ev.type == sf::Event::TextEntered)
             {
                 if(mode == false)
                 {
-                    //if backspace is pressed delete last character
+                    //if backspace is pressed delete last character (only if there is minimum one character)
                     if(ev.text.unicode == 8)
                     {
                         if(text_up_string.length()>0)
@@ -67,6 +68,7 @@ int main()
                         //if not, add last character to string
                         text_up_string+=ev.text.unicode;
                     }
+                    text_up.text.setOutlineColor(sf::Color::Black);
                     text_up.text.setString(text_up_string);
                 } else
                 {
@@ -82,11 +84,20 @@ int main()
                         //if not, add last character to string
                         text_down_string+=ev.text.unicode;
                     }
+                    text_down.text.setOutlineColor(sf::Color::Black);
                     text_down.text.setString(text_down_string);
                 }
                 
             }
             
+        }
+
+        //set positon of text
+        if(text_up_string.length() > 0)
+        {   
+            //set text positon to middle of x
+            text_up.text.setPosition(960 - (text_up.text.findCharacterPos(text_up_string.length()).x - text_up.text.getPosition().x)/2, 0);
+            text_down.text.setPosition(960 -(text_down.text.findCharacterPos(text_down_string.length()).x - text_down.text.getPosition().x)/2, 1080-text_down.text.getLocalBounds().height*2);
         }
 
         //change mode when enter is clicked
