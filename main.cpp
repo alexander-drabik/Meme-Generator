@@ -22,8 +22,8 @@ int main()
     text_down.text.setOutlineThickness(4);
     text_up.text.setString("ENTER TEXT HERE");
     text_up.text.setOutlineColor(sf::Color(180, 180, 180));
-    text_up.text.setCharacterSize(150);
-    text_down.text.setCharacterSize(50);
+    text_up.text.setCharacterSize(200);
+    text_down.text.setCharacterSize(200);
 
     //set maximum text size and minimum text size
     int max_font = 200;
@@ -100,10 +100,21 @@ int main()
             text_down.text.setPosition(960 -(text_down.text.findCharacterPos(text_down_string.length()).x - text_down.text.getPosition().x)/2, 1080-text_down.text.getLocalBounds().height*2);
         }
 
+        //set character size of text
+        if(text_up.text.findCharacterPos(text_up_string.length()).x > window.getSize().x)
+        {
+            text_up.text.setCharacterSize(text_up.text.getCharacterSize()-1);
+        }
+        if(text_down.text.findCharacterPos(text_down_string.length()).x > window.getSize().x)
+        {
+            text_down.text.setCharacterSize(text_down.text.getCharacterSize()-1);
+        }
         //change mode when enter is clicked
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && mode == false)
         {
             mode = true;
+            text_up_string.pop_back();
+            text_up.text.setString(text_up_string);
         }
 
          /*change text size*/
