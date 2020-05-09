@@ -15,12 +15,12 @@ int main()
     Text text_up;
     Text text_down;
     
-    //set text defould variables
+    //set text defout variables
     text_up.load_font("font.ttf");
     text_down.load_font("font.ttf");
     text_up.text.setOutlineThickness(4);
     text_down.text.setOutlineThickness(4);
-    text_up.text.setString("12224");
+    text_up.text.setString("[enter text here");
     text_up.text.setOutlineColor(sf::Color::Black);
     text_up.text.setCharacterSize(0);
 
@@ -30,10 +30,10 @@ int main()
 
     //string for text
     std::string text_up_string;
-    std::string text_up_string;
+    std::string text_down_string;
 
     //mode of text (false = edit up text, true = edit down text)
-    bool mode;
+    bool mode = false;
 
     //set frame limit to 60fps
     window.setFramerateLimit(60);
@@ -49,6 +49,50 @@ int main()
             {
                 return 0;
             }
+
+            //type to string
+            if(ev.type == sf::Event::TextEntered)
+            {
+                if(mode == false)
+                {
+                    //if backspace is pressed delete last character
+                    if(ev.text.unicode == 8)
+                    {
+                        if(text_up_string.length()>0)
+                        {
+                            text_up_string.pop_back();
+                        }
+                    } else
+                    {
+                        //if not, add last character to string
+                        text_up_string+=ev.text.unicode;
+                    }
+                    text_up.text.setString(text_up_string);
+                } else
+                {
+                    //if backspace is pressed delete last character
+                    if(ev.text.unicode == 8)
+                    {
+                        if(text_down_string.length()>0)
+                        {
+                            text_down_string.pop_back();
+                        }
+                    } else
+                    {
+                        //if not, add last character to string
+                        text_down_string+=ev.text.unicode;
+                    }
+                    text_down.text.setString(text_down_string);
+                }
+                
+            }
+            
+        }
+
+        //change mode when enter is clicked
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+        {
+            mode = true;
         }
 
          /*change text size*/
