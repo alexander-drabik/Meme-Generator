@@ -29,12 +29,19 @@ int main()
     int max_font = 200;
     int min_font = 30;
 
+
     //string for text
     std::string text_up_string;
     std::string text_down_string;
 
     //mode of text (false = edit up text, true = edit down text)
     bool mode = false;
+
+    //background
+    sf::Sprite background;
+    sf::Texture background_texture;
+    background_texture.loadFromFile("back.png");
+    background.setTexture(background_texture);
 
     //set frame limit to 60fps
     window.setFramerateLimit(60);
@@ -135,9 +142,14 @@ int main()
             text_down.text.setCharacterSize(max_font);
         }
 
+        //set position of background
+        background.setPosition(960 - background_texture.getSize().x/2, 540-background_texture.getSize().y/2);
+
         //draw window & stuff
             //clear window
         window.clear(sf::Color::Blue);
+            //draw background
+        window.draw(background);
             //draw text
         text_up.draw();
         text_down.draw();
